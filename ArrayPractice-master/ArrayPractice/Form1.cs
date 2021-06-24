@@ -14,18 +14,27 @@ namespace ArrayPractice
     {
         static Random rand = new Random();
 
-        int []vx = new int[3];
-        int[] vy = new int[3];
+        int []vx = new int[100];
+        int[] vy = new int[100];
+        Label[] labels = new Label[100];
+
         int score = 100;
 
         public Form1()
         {
             InitializeComponent();
 
-            for(int i=0;i<3;i++)
+            for(int i=0;i<100;i++)
             {
                 vx[i] = rand.Next(-20, 21);
                 vy[i] = rand.Next(-20, 21);
+
+                labels[i] = new Label();
+                labels[i].AutoSize = true;
+                labels[i].Text = "★";
+                Controls.Add(labels[i]);
+                labels[i].Left = rand.Next(ClientSize.Width - labels[i].Width);
+                labels[i].Top = rand.Next(ClientSize.Height - labels[i].Height);
             }
 
             label1.Left = rand.Next(ClientSize.Width - label1.Width);
@@ -99,6 +108,26 @@ namespace ArrayPractice
                 vy[2] = -Math.Abs(vy[2]);
             }
 
+            for (int i = 0; i < 100; i++)
+            {
+                if (labels[i].Left < 0)
+                {
+                    vx[i] = Math.Abs(vx[i]);
+                }
+                if (labels[i].Top < 0)
+                {
+                    vy[i] = Math.Abs(vy[i]);
+                }
+                if (labels[i].Right > ClientSize.Width)
+                {
+                    vx[i] = -Math.Abs(vx[i]);
+                }
+                if (labels[i].Bottom > ClientSize.Height)
+                {
+                    vy[i] = -Math.Abs(vy[i]);
+                }
+            }
+
             Point fpos = PointToClient(MousePosition);
 
             if ((fpos.X >= label1.Left)
@@ -122,12 +151,14 @@ namespace ArrayPractice
             {
                 label3.Visible = false;
             }
+            
             if ((label1.Visible == false)
                 && (label2.Visible == false)
                 && (label3.Visible == false))
             {
                 //timer1.Enabled = false;
             }
+           
 
         }
 
@@ -139,6 +170,24 @@ namespace ArrayPractice
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for(int i=0;i<10;i++)
+            {
+                if(i==2)
+                {
+                    continue;
+                }
+
+                if(i==5)
+                {
+                    break;
+                }
+
+                MessageBox.Show("" + i);
+            }
         }
     }
 }
