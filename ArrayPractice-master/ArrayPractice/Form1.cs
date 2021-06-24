@@ -56,6 +56,8 @@ namespace ArrayPractice
             label2.Top += vy[1];
             label3.Left += vx[2];
             label3.Top += vy[2];
+            //labels[i].Left += vx[2];
+            //labels[i].Top += vy[2];
 
             if (label1.Left < 0)
             {
@@ -151,14 +153,21 @@ namespace ArrayPractice
             {
                 label3.Visible = false;
             }
-            
-            if ((label1.Visible == false)
-                && (label2.Visible == false)
-                && (label3.Visible == false))
+
+            for (int i = 0; i < 100; i++)
             {
-                //timer1.Enabled = false;
+                if ((fpos.X >= labels[i].Left)
+                && (fpos.X < labels[i].Right)
+                && (fpos.Y >= labels[i].Top)
+                && (fpos.Y < labels[i].Bottom))
+                {
+                    labels[i].Visible = false;
+                }
             }
-           
+
+
+
+
 
         }
 
