@@ -16,6 +16,11 @@ namespace ArrayPractice
 
         int vx = rand.Next(-20, 21);
         int vy = rand.Next(-20, 21);
+        int vx2 = rand.Next(-20, 21);
+        int vy2= rand.Next(-20, 21);
+        int vx3 = rand.Next(-20, 21);
+        int vy3 = rand.Next(-20, 21);
+
         int score = 100;
 
         public Form1()
@@ -37,8 +42,10 @@ namespace ArrayPractice
 
             label1.Left += vx;
             label1.Top += vy;
-            label2.Left += vx;
-            label2.Top += vy;
+            label2.Left += vx2;
+            label2.Top += vy2;
+            label3.Left += vx3;
+            label3.Top += vy3;
 
             if (label1.Left < 0)
             {
@@ -59,19 +66,36 @@ namespace ArrayPractice
 
             if (label2.Left < 0)
             {
-                vx = Math.Abs(vx);
+                vx2 = Math.Abs(vx2);
             }
             if (label2.Top < 0)
             {
-                vy = Math.Abs(vy);
+                vy2 = Math.Abs(vy2);
             }
             if (label2.Right > ClientSize.Width)
             {
-                vx = -Math.Abs(vx);
+                vx2 = -Math.Abs(vx2);
             }
             if (label2.Bottom > ClientSize.Height)
             {
-                vy = -Math.Abs(vy);
+                vy2 = -Math.Abs(vy2);
+            }
+
+            if (label3.Left < 0)
+            {
+                vx3 = Math.Abs(vx3);
+            }
+            if (label3.Top < 0)
+            {
+                vy3 = Math.Abs(vy3);
+            }
+            if (label3.Right > ClientSize.Width)
+            {
+                vx3 = -Math.Abs(vx3);
+            }
+            if (label3.Bottom > ClientSize.Height)
+            {
+                vy3 = -Math.Abs(vy3);
             }
 
             Point fpos = PointToClient(MousePosition);
@@ -80,14 +104,30 @@ namespace ArrayPractice
                 && (fpos.X < label1.Right)
                 && (fpos.Y >= label1.Top)
                 && (fpos.Y < label1.Bottom))
-
-                if ((fpos.X >= label2.Left)
+                {
+                label1.Visible = false;
+            }
+            if ((fpos.X >= label2.Left)
                 && (fpos.X < label2.Right)
                 && (fpos.Y >= label2.Top)
                 && (fpos.Y < label2.Bottom))
-                {
-                timer1.Enabled = false;
+            {
+                label2.Visible = false;
             }
+            if ((fpos.X >= label3.Left)
+                && (fpos.X < label3.Right)
+                && (fpos.Y >= label3.Top)
+                && (fpos.Y < label3.Bottom))
+            {
+                label3.Visible = false;
+            }
+            if ((label1.Visible == false)
+                && (label2.Visible == false)
+                && (label3.Visible == false))
+            {
+
+            }
+
         }
 
         private void scoreLabel_Click(object sender, EventArgs e)
